@@ -24,8 +24,11 @@ is broken.
 
 
 ## Run it
+It's made with golang 1.10.3 but it should work with other versions too.
 Build both server and clients:
 ```golang
+#Download dependencies first:
+go get -d ./...
 go build server.go
 go build client.go
 ```
@@ -40,3 +43,8 @@ And then two clients:
 ./client
 ```
 And have fun!
+
+# TODO:
+ * Add an AI: After a threshold waiting time, an opponent should start a game with an AI.
+ * Add an heartbeating: to know if the other opponent is gone.
+ * Add a UI: I'm planning to add a simple UI with QT library.
