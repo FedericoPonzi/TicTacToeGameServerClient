@@ -17,18 +17,16 @@ func NewClientHandler(conn net.Conn)(ClientHandler) {
 	return ClientHandler{conn, nil}
 }
 
-
-
-func (handler *ClientHandler) receiveMove() (toRet int8){
-	err := binary.Read(handler.conn, binary.BigEndian, &toRet)
+func (handler *ClientHandler) receiveMove() (toRet int8, err error){
+	err = binary.Read(handler.conn, binary.BigEndian, &toRet)
 
 	if err != nil {
-		log.Println("Error on reading:", err) //TODO capire l'errore o uscire
+		log.Println("Error on reading:", err)
 	}
 
-	return toRet
-}
 
+	return toRet, err
+}
 
 // Send gamelogic board to the client
 func (handler *ClientHandler) sendStatus() {

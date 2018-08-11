@@ -8,14 +8,35 @@ There are still many TODO (it still need an appropriate error handling) but its 
 
 It's made in go and using goroutines it is able to handle multiple game simultaneously.
 
-The protocol is very simple, when two opponents connect, it sends them their "mark", 
+The protocol is very simple: 
+ * when two opponents connect, it sends them their "mark", 
 either a `o` or a `x`.
 
-`x` moves first. The client sends the move. If the move is valid, the server will validate it 
+ * `x` moves first. The client sends the move. 
+ * If the move is valid, the server will validate it 
 by sending to both clients the next move. Both client have a copy of the board, and will update their 
 local copy.
 
-When the game is over both clients get disconnected.
+ * When the game is over both clients get disconnected.
 
 There are still things to do, for example it needs a way to know if the connection 
 is broken.
+
+
+## Run it
+Build both server and clients:
+```golang
+go build server.go
+go build client.go
+```
+Run first the server:
+```
+./server
+```
+And then two clients:
+```
+./client
+#In another terminal
+./client
+```
+And have fun!

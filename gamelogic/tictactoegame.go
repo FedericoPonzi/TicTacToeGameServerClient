@@ -55,7 +55,7 @@ func (game *TicTacToeGame) HasWon(mark int8) (toRet bool) {
 }
 func (game *TicTacToeGame) DoMove(move int8) error {
 
-	if game.board[move] != -1 {
+	if move > 9 || move < 0 || game.board[move] != -1 {
 		log.Println("Illegal move.")
 		return errors.New("Invalid move.")
 	}
@@ -66,11 +66,22 @@ func (game *TicTacToeGame) DoMove(move int8) error {
 	return nil
 }
 func (game *TicTacToeGame) PrintBoard() {
-	fmt.Print(" ")
+	var mark string
 	for i, el := range game.board {
-		fmt.Printf("%d | ", el)
+		if el == 0 {
+			mark = " x "
+		} else if el == 1 {
+			mark = " o "
+		} else {
+			mark = " - "
+		}
 		if i % 3 == 2 {
-			fmt.Println("")
+			fmt.Println(mark)
+			if i != 8 {
+				fmt.Println("-----------")
+			}
+		} else{
+			fmt.Print(mark + "|")
 		}
 	}
 }

@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"reflect"
 	"fmt"
+	"io"
 )
 
 type GameHandler struct{
@@ -45,8 +46,11 @@ func (handler *GameHandler) RunGame() {
 	for !handler.game.IsOver() {
 
 		currentHandler := handler.getCurrentTurnHandler()
-		move = currentHandler.receiveMove()
-
+		move, err = currentHandler.receiveMove() // todo handle error
+		if err == io.EOF {
+			// I can do better.
+			break;
+		}
 		log.Println("Move received: " + strconv.Itoa(int((move))))
 		if move == -1 { //something went very bad. Adieu
 			log.Println("Move is -1, adieu!")
