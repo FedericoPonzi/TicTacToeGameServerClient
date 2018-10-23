@@ -39,6 +39,7 @@ func (handler *GameHandler) RunGame() {
 	//2. receive from first,
 	//3. receive from second,
 	//4. add liveness probe.
+	//5. print message
 	log.Println("Succesfully sent marks! Game is set, let's start!")
 	var(
 		move int8
